@@ -1,21 +1,10 @@
 package project;
 
-import java.util.ArrayList;
+import java.util.Vector;
 
-public class ArrayListStack <T> implements IStack<T> {
+public class VectorStack <T> implements IStack<T>{
 
-	
-	private ArrayList<T> myCurrentList = new ArrayList<T>();
-	
-	public static ArrayListStack instance;
-	
-	public static ArrayListStack getInstance() {
-		if(instance == null) {
-			instance = new ArrayListStack();
-		}
-		return instance;
-	}
-	
+	private Vector<T> myCurrentList = new Vector<T>();
 	@Override
 	public T Pop() {
 		return myCurrentList.remove(myCurrentList.size()-1);

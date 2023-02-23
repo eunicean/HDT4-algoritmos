@@ -2,36 +2,98 @@ package project;
 
 public class LinkedListStack <T> implements IStack<T> {
 
-	public static LinkedListStack instance;
+	private int count;
+    private SingleLinkedNode<T> first;
+    private SingleLinkedNode<T> last;
 	
-	public static LinkedListStack getInstance() {
-		if(instance == null) {
-			instance = new LinkedListStack();
-		}
-		return instance;
-	}
+    public LinkedListStack() {
+    	this.first = null;
+    	this.last = null;
+    }
 	
 	@Override
 	public T Pop() {
-		// TODO Auto-generated method stub
-		return null;
+		SingleLinkedNode<T> temporal = null;
+		if(first != null) {
+			if(count == 1) {
+				temporal = first;
+				this.first = null;
+				this.last = null;
+				count--;
+				
+			}
+			else {
+				SingleLinkedNode<T> temporalForFirst = first;
+				temporal = first.getNext();
+				
+				while(temporal != null) {
+					temporalForFirst = temporal;
+					temporal = temporal.getNext();
+				}
+				
+				last = temporalForFirst;
+				last.setNext(null);
+				count--;
+			}
+		}
+		return temporal.getValue();
 	}
 
 	@Override
-	public void Push(T item) {
-		// TODO Auto-generated method stub
-		
+	public void Push(T item) { //add Node i suppose
+		SingleLinkedNode<T> newNode = new SingleLinkedNode<T>(item);
+		if(first == null) {
+			this.first = newNode;
+			this.last = newNode;
+		}
+		else {
+			this.last.setNext(newNode);
+			this.last = newNode;
+		}
+		count++;
 	}
 
 	@Override
 	public T Peek() {
-		// TODO Auto-generated method stub
-		return null;
+		return last.getValue();
 	}
 
 	@Override
-	public int Size() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int Size() {   
+        return count;
+	}
+
+	@Override
+	public T GetValue(int i) {
+		T answer = null;
+		if(first != null) {
+			if(i == 0) {
+				answer = first.getValue();
+			}
+			else if(i == (count - 1)) {
+				answer = last.getValue();
+			}
+			else if((i > 0) && (i<(count - 1))) {
+				SingleLinkedNode<T> temporal = first;
+				int j = 0;
+				
+				while((temporal != null) && (j != i)) {
+					temporal = temporal.getNext();
+					j++;
+				}
+				if (temporal != null)
+                {
+                    answer = temporal.getValue();
+                }
+                else
+                {
+                	answer = null;
+                }
+			}
+			else {
+				answer = null;
+			}
+		}
+		return answer;
 	}
 }

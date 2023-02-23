@@ -3,38 +3,76 @@ package project;
 
 public class DoubleLinkedListStack <T> implements IStack<T> {
 	
-	
-	public static DoubleLinkedListStack instance;
-	
-	public static DoubleLinkedListStack getInstance() {
-		if(instance == null) {
-			instance = new DoubleLinkedListStack();
-		}
-		return instance;
-	}
+	private int count = 0;
+    private DoubleLinkedNode<T> first = null;
+    private DoubleLinkedNode<T> last = null;
 
 	@Override
 	public T Pop() {
-		// TODO Auto-generated method stub
-		return null;
+		DoubleLinkedNode<T> answer = last;
+		last = last.getPrevious();
+		last.setNext(null);
+		return answer.getValue();
 	}
 
 	@Override
 	public void Push(T item) {
-		// TODO Auto-generated method stub
-		
+		DoubleLinkedNode<T> newNode = new DoubleLinkedNode<T>(item);
+		if(first == null) {
+			first = newNode;
+			last = newNode;
+			first.setNext(first);
+			first.setPrevious(first);
+		}
+		else {
+			newNode.setPrevious(last);
+			last = newNode;
+		}
+		count++;
 	}
 
 	@Override
 	public T Peek() {
-		// TODO Auto-generated method stub
-		return null;
+		return last.getValue();
 	}
 
 	@Override
 	public int Size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return count;
+	}
+
+	@Override
+	public T GetValue(int i) {
+		T answer = null;
+		if(first != null) {
+			if(i == 0) {
+				answer = first.getValue();
+			}
+			else if(i == (count - 1)) {
+				answer = last.getValue();
+			}
+			else if((i > 0) && (i<(count - 1))) {
+				DoubleLinkedNode<T> temporal = first;
+				int j = 0;
+				
+				while((temporal != null) && (j != i)) {
+					temporal = temporal.getNext();
+					j++;
+				}
+				if (temporal != null)
+	            {
+	                answer = temporal.getValue();
+	            }
+	            else
+	            {
+	            	answer = null;
+	            }
+			}
+			else {
+				answer = null;
+			}
+		}
+		return answer;
 	}
 
 }

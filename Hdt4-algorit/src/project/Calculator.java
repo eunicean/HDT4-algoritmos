@@ -4,16 +4,16 @@ import java.util.*;
 
 public class Calculator {
 	private IStack<Float> listOfNumbers;
-	private ArrayList<String> listOfCharacters;
+	private IStack<String> listOfCharacters;
 	
 	private static Calculator instance;
 	
-	public Calculator(int option, ArrayList<String> listOfCharacters) {
+	public Calculator(int option, IStack<String> listOfCharacters) {
 		listOfNumbers = Factory.getInstance().getStack(option);
 		this.listOfCharacters = listOfCharacters;
 	}
 	
-	public static Calculator getInstance(int option, ArrayList<String> listOfCharacters) {
+	public static Calculator getInstance(int option, IStack<String> listOfCharacters) {
 		if(instance == null) {
 			instance = new Calculator(option, listOfCharacters);
 		}
@@ -58,29 +58,29 @@ public class Calculator {
 		int pos = 0;
 		String r = "";
 		while(pos < listOfCharacters.Size()) {
-			if(listOfCharacters.get(pos).equals("+")) {
+			if(listOfCharacters.GetValue(pos).equals("+")) {
 				float b = listOfNumbers.Pop();
 				float a = listOfNumbers.Pop();
 				float c = Add(a, b);
 				listOfNumbers.Push(c);
 			}
-			else if(listOfCharacters.get(pos).equals("-")) {
+			else if(listOfCharacters.GetValue(pos).equals("-")) {
 				float b = (float) listOfNumbers.Pop();
 				float a = (float) listOfNumbers.Pop();
 				listOfNumbers.Push(Substraction(a, b));
 			}
-			else if(listOfCharacters.get(pos).equals("*")) {
+			else if(listOfCharacters.GetValue(pos).equals("*")) {
 				float b = (float) listOfNumbers.Pop();
 				float a = (float) listOfNumbers.Pop();
 				listOfNumbers.Push(Multiply(a, b));
 			}
-			else if(listOfCharacters.get(pos).equals("/")) {
+			else if(listOfCharacters.GetValue(pos).equals("/")) {
 				float b = (float) listOfNumbers.Pop();
 				float a = (float) listOfNumbers.Pop();
 				listOfNumbers.Push(Divition(a, b));
 			}
-			else if(Character.isDigit(listOfCharacters.get(pos).charAt(0))){
-				listOfNumbers.Push(Float.parseFloat(listOfCharacters.get(pos)));
+			else if(Character.isDigit(listOfCharacters.GetValue(pos).charAt(0))){
+				listOfNumbers.Push(Float.parseFloat(listOfCharacters.GetValue(pos)));
             }
 			pos = pos + 1;
 		}
@@ -89,7 +89,7 @@ public class Calculator {
 				r = "Faltaron " + (listOfNumbers.Size()-1) + "operadores";
 			}
 			else {
-				r = "La respuesta es " + listOfNumbers.get(0);
+				r = "La respuesta es " + listOfNumbers.GetValue(0);
 			}
 		}
 		return r;

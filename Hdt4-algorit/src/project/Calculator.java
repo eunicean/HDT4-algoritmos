@@ -4,16 +4,16 @@ import java.util.*;
 
 public class Calculator {
 	private IStack<Float> listOfNumbers;
-	private IStack<String> listOfCharacters;
+	private ArrayList<String> listOfCharacters;
 	
 	private static Calculator instance;
 	
-	public Calculator(int option, IStack<String> listOfCharacters) {
+	public Calculator(int option, ArrayList<String> listOfCharacters) {
 		listOfNumbers = Factory.getInstance().getStack(option);
 		this.listOfCharacters = listOfCharacters;
 	}
 	
-	public static Calculator getInstance(int option, IStack<String> listOfCharacters) {
+	public static Calculator getInstance(int option, ArrayList<String> listOfCharacters) {
 		if(instance == null) {
 			instance = new Calculator(option, listOfCharacters);
 		}
@@ -47,40 +47,40 @@ public class Calculator {
 		this.listOfNumbers = listOfNumbers;
 	}
 
-	public IStack<String> getListOfCharacters() {
+	public ArrayList<String> getListOfCharacters() {
 		return listOfCharacters;
 	}
 
-	public void setListOfCharacters(IStack<String> listOfCharacters) {
+	public void setListOfCharacters(ArrayList<String> listOfCharacters) {
 		this.listOfCharacters = listOfCharacters;
 	}
 	public String calculate() {
 		int pos = 0;
 		String r = "";
-		while(pos < listOfCharacters.Size()) {
-			if(listOfCharacters.GetValue(pos).equals("+")) {
+		while(pos < listOfCharacters.size()) {
+			if(listOfCharacters.get(pos).equals("+")) {
 				float b = listOfNumbers.Pop();
 				float a = listOfNumbers.Pop();
 				float c = Add(a, b);
 				listOfNumbers.Push(c);
 			}
-			else if(listOfCharacters.GetValue(pos).equals("-")) {
+			else if(listOfCharacters.get(pos).equals("-")) {
 				float b = (float) listOfNumbers.Pop();
 				float a = (float) listOfNumbers.Pop();
 				listOfNumbers.Push(Substraction(a, b));
 			}
-			else if(listOfCharacters.GetValue(pos).equals("*")) {
+			else if(listOfCharacters.get(pos).equals("*")) {
 				float b = (float) listOfNumbers.Pop();
 				float a = (float) listOfNumbers.Pop();
 				listOfNumbers.Push(Multiply(a, b));
 			}
-			else if(listOfCharacters.GetValue(pos).equals("/")) {
+			else if(listOfCharacters.get(pos).equals("/")) {
 				float b = (float) listOfNumbers.Pop();
 				float a = (float) listOfNumbers.Pop();
 				listOfNumbers.Push(Divition(a, b));
 			}
-			else if(Character.isDigit(listOfCharacters.GetValue(pos).charAt(0))){
-				listOfNumbers.Push(Float.parseFloat(listOfCharacters.GetValue(pos)));
+			else if(Character.isDigit(listOfCharacters.get(pos).charAt(0))){
+				listOfNumbers.Push(Float.parseFloat(listOfCharacters.get(pos)));
             }
 			pos = pos + 1;
 		}

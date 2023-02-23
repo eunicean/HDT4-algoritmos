@@ -18,7 +18,7 @@ public class Factory<T> {
 		case 1: // AraylistStack
 			myStack = new ArrayListStack<T>();
 			break;
-		case 2: // ArrayStack - vector
+		case 2: // vectorStack
 			myStack = new VectorStack<T>();
 			break;
 		case 3: // LinkedListStack

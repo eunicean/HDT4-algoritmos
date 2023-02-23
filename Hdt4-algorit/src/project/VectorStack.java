@@ -1,3 +1,9 @@
+/* Universidad del valle de Guatemala
+ * Eunice Anah[i Mata - 21231
+ *  
+ * La clase funciona como mi vector
+ * 
+ * */
 package project;
 
 import java.util.Vector;

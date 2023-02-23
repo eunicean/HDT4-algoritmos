@@ -1,3 +1,10 @@
+/* Universidad del valle de Guatemala
+ * Eunice Anah[i Mata - 21231
+ *  
+ * La clase funciona como mi nodo para LL
+ * 
+ * */
+
 package project;
 
 public class SingleLinkedNode<T> {

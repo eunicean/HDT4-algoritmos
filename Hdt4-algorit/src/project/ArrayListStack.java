@@ -1,3 +1,10 @@
+/* Universidad del valle de Guatemala
+ * Eunice Anah[i Mata - 21231
+ *  
+ * La clase funciona como mi arraylist
+ * 
+ * */
+
 package project;
 
 import java.util.ArrayList;
